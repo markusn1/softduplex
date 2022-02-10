@@ -42,7 +42,7 @@ while true; do
     [ "$VERBOSE" = true ] && echo "$INPUT_DIR_EVEN_PAGES is still empty"
   fi
 
-  if ls $INPUT_DIR_ODD_PAGES/.PDF* 2>/dev/null; then
+  if ls $INPUT_DIR_ODD_PAGES/*.PDF 2>/dev/null; then
     INPUT_FILE_ODD_PAGES=$(readlink -f $INPUT_DIR_ODD_PAGES/*.PDF | head -1)
   else
     [ "$VERBOSE" = true ] && echo "$INPUT_DIR_ODD_PAGES is still empty"
