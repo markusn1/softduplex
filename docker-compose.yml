@@ -1,17 +1,19 @@
 version: "3"
 services:
   softduplex:
+    build: https://github.com/markusn1/softduplex.git
+    container_name: softduplex
     environment:
       # Set to "true" to enable verbositiy
       VERBOSE: "false"
-      REVERSE: "${REVERSE}"
-    user: "${UID}"
-    build: .
+      REVERSE: "true"
+    user: "0"
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "10"
     volumes:
-      - ./input:/input
-      - ./output:/output
+      - /root/docker/softduplex/input/even:/input/even
+      - /root/docker/softduplex/input/odd:/input/odd
+      - /root/docker/paperless-ng/consume:/output
