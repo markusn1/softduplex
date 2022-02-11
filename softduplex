@@ -1,5 +1,6 @@
 #!/usr/bin/sh
 set -e
+set -x
 
 # Copyright (C) 2021 Gunter Miegel <gunter.miegel@rgsqd.de>
 #
@@ -43,7 +44,7 @@ while true; do
   fi
 
   if ls $INPUT_DIR_ODD_PAGES/*.PDF 2>/dev/null; then
-    INPUT_FILE_ODD_PAGES=$(readlink -f $INPUT_DIR_ODD_PAGES/*.PDF | head -1)
+    INPUT_FILE_ODD_PAGES=$(readlink -f "$INPUT_DIR_ODD_PAGES"/*.PDF | head -1)
   else
     [ "$VERBOSE" = true ] && echo "$INPUT_DIR_ODD_PAGES is still empty"
   fi
@@ -52,7 +53,7 @@ while true; do
   # other processes which want to access the newly created PDF file will get confused when they
   # want to access the file which is still written.
   if [ -n "$INPUT_FILE_EVEN_PAGES" ] && [ -n "$INPUT_FILE_ODD_PAGES" ]; then
-    OUTPUT_FILE_MERGED=$OUTPUT_TEMP_DIR/$(basename $INPUT_FILE_ODD_PAGES .pdf)_merged.pdf
+    OUTPUT_FILE_MERGED=$OUTPUT_TEMP_DIR/$(basename "$INPUT_FILE_ODD_PAGES" .pdf)_merged.pdf
 
     wait_for_pdf_file "$INPUT_FILE_ODD_PAGES"
     wait_for_pdf_file "$INPUT_FILE_EVEN_PAGES"
