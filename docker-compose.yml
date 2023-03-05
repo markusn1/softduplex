@@ -1,7 +1,7 @@
-version: "3"
+version: '3'
 services:
-  softduplex:
-    build: https://github.com/markusn1/softduplex.git
+  app:
+    image: 'biomann/softduplex:latest'
     container_name: softduplex
     environment:
       # Set to "true" to enable verbositiy
@@ -14,6 +14,6 @@ services:
         max-size: "200k"
         max-file: "10"
     volumes:
-      - /root/docker/softduplex/input/even:/input/even
-      - /root/docker/softduplex/input/odd:/input/odd
-      - /root/docker/paperless-ng/consume:/output
+      - /volume2/docker/softduplex/input/even:/input/even
+      - /volume2/docker/softduplex/input/odd:/input/odd
+      - /volume2/docker/paperless-ng/consume:/output
